@@ -1,0 +1,8 @@
+Read AGENTS.md in the project root and run the watermark removal pipeline on this image: {{IMAGE_PATH}}
+
+Use the unified CLI (python -m stega.cli) with the appropriate commands from AGENTS.md. Typical flow:
+1. detect <image> — check if cleaning is needed
+2. agentic <image> -o <output> — or clean <image> -o <output>
+3. If corner emblems remain: remove-region <cleaned> -o <final> --method lama
+
+Report the final output path and whether it succeeded.
