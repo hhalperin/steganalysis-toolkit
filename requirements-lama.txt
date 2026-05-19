@@ -2,5 +2,5 @@
 # Install with: pip install -r requirements-lama.txt
 # Note: May have dependency conflicts with Pillow>=10; use a separate env if needed.
 simple-lama-inpainting>=0.1.2
-torch>=1.13.1
+torch>=2.8.0
 torchvision>=0.14.1
