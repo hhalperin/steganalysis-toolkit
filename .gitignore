@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*$py.class
+*.pyo
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env
+
+# Models (trained weights)
+models/*.pth
+models/*.pt
+
+# Assets: photos, outputs, reports (all image/report content)
+assets/battle-videos
+assets/clean
+assets/dirty
+assets/processing
+assets/reports
+assets/samples
+assets/test-results
+# Legacy asset dirs (if migration scripts create them)
+assets/cleaned
+assets/dirty-images
+assets/input
+assets/output
+assets/detection_reports
+
+# Agentic live preview temp file
+.agentic_live.png
+
+# Logs
+*.log
+ai_stegano.log
+
+# IDE
+.cursor/
+.claude/
+
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets (public repo safety)
+.env.*
+*.pem
+*.key
+secrets/

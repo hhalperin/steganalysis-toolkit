@@ -1,0 +1,31 @@
+# PNG Analysis and Steganography Detection Tools
+# Modern Python libraries for comprehensive image forensics
+
+# Core image processing
+Pillow>=10.0.0              # Advanced image processing and manipulation
+pypng>=0.20220715.0         # Pure Python PNG reader/writer for low-level access
+opencv-python>=4.8.0        # Detection and inpainting (visible watermarks). Use opencv-python-headless in headless/CI if preferred.
+
+# Data analysis and numerical computing
+numpy>=1.24.0               # Numerical computing for statistical analysis
+scipy>=1.10.0               # Scientific computing for advanced algorithms
+
+# Binary data and cryptography
+pycryptodome>=3.19.0        # Cryptographic functions and analysis
+zstandard>=0.21.0           # Advanced compression detection
+
+# Metadata extraction
+exifread>=3.0.0             # EXIF metadata extraction
+pillow-heif>=0.13.0         # Support for modern image formats
+
+# Visualization and reporting
+matplotlib>=3.7.0           # Plotting for statistical analysis
+rich>=13.0.0                # Beautiful terminal output and progress bars
+tabulate>=0.9.0             # Pretty-print tabular data
+
+# Development and testing
+pytest>=7.4.0              # Testing framework
+black>=23.0.0               # Code formatting
+mypy>=1.5.0                 # Type checking
+
+# Optional: better inpainting for agentic/remove-region (pip install -r requirements-lama.txt)

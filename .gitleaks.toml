@@ -1,0 +1,6 @@
+# Allowlist paths for directory-mode scans (e.g. gitleaks detect --no-git).
+# Git-mode scans ignore .venv because it is not tracked.
+[allowlist]
+paths = [
+  '''\.venv/''',
+]
