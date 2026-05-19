@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Unified CLI for steganalysis and watermark-resilience experiments (detect → modify → verify).
+Unified CLI for steganalysis and watermark-resilience experiments (detect -> modify -> verify).
 Run from project root: ``stk …`` or ``python -m stega.cli …``.
 """
 
@@ -56,7 +56,7 @@ def cmd_clean(args) -> int:
 
 
 def cmd_agentic(args) -> int:
-    """Iterative pipeline: detect → modify visible overlays → verify → retry."""
+    """Iterative pipeline: detect -> modify visible overlays -> verify -> retry."""
     import threading
     from .cli_commands.agentic import run_pipeline
     input_path = _resolve_path(args.input)
@@ -202,7 +202,7 @@ def cmd_full_test(args) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(
         prog="stk",
-        description="Steganalysis toolkit — detection, resilience experiments, and verification. Use only on media you own or synthetic fixtures.",
+        description="Steganalysis toolkit - detection, resilience experiments, and verification. Use only on media you own or synthetic fixtures.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -219,7 +219,7 @@ def main() -> int:
     p.add_argument("--invisible-only", action="store_true", help="Skip visible-overlay branch; LSB/steganography/patterns only")
     p.set_defaults(func=cmd_clean)
 
-    p = subparsers.add_parser("agentic", help="Detect → modify overlays → verify → retry (logged)")
+    p = subparsers.add_parser("agentic", help="Detect -> modify overlays -> verify -> retry (logged)")
     p.add_argument("input", help="Input image path")
     p.add_argument("-o", "--output", help="Output path")
     p.add_argument("--live", action="store_true", help="Live preview window during run")
@@ -253,7 +253,7 @@ def main() -> int:
     p.add_argument("--quick", action="store_true", help="Skip slow detectors")
     p.set_defaults(func=cmd_full_test)
 
-    p = subparsers.add_parser("ai-loop", help="Structured loop to study synthetic “AI-tell” markers (research harness)")
+    p = subparsers.add_parser("ai-loop", help='Structured loop to study synthetic "AI-tell" markers (research harness)')
     p_sub = p.add_subparsers(dest="ai_phase", required=True)
     p_init = p_sub.add_parser("init", help="Initialize: copy image to assets/processing/ai-loop/current.png")
     p_init.add_argument("image", help="Input image path")
