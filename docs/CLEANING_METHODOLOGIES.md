@@ -31,7 +31,7 @@ Summary of methods and tools beyond our current pipeline, for reviewing and impr
 | [SLBR-Visible-Watermark-Removal](https://github.com/bcmi/SLBR-Visible-Watermark-Removal) | Visible removal | ACM MM 2021; localization + background refinement |
 | [remove-watermarks](https://github.com/X-CCS/remove-watermarks) | Visible | “On the Effectiveness of Visible Watermarks” (MIT) |
 | [watermark-removal](https://github.com/olivermen/watermark-removal) | General | Minimal docs |
-| **untext** (Jurph) | Text + known watermarks | EAST/DocTR/EasyOCR + ORB for watermarks; LaMa/TELEA inpainting; CLI + web UI; Python 3.10+, GPU recommended |
+| **untext** | Text + known watermarks | EAST/DocTR/EasyOCR + ORB for watermarks; LaMa/TELEA inpainting; CLI + web UI; Python 3.10+, GPU recommended |
 
 ---
 
@@ -49,7 +49,7 @@ Summary of methods and tools beyond our current pipeline, for reviewing and impr
    PSNR/SSIM in `VisibleWatermarkRemover._calculate_removal_quality` (when SSIM available). Compare original vs cleaned in a region of interest.
 
 4. **Visual inspection**
-   Compare `office_crocs_cleaned.png` (LSB/pattern cleaning) vs `office_crocs_final.png` (after bottom-right emblem inpainting).
+   Compare intermediate vs final outputs (e.g. LSB/pattern cleaning pass vs corner emblem inpainting pass) under your `assets/` tree.
 
 ---
 

@@ -15,9 +15,9 @@ The **agentic** pipeline is:
 - **Simplicity** — One detector family, one disruption backend per run. Easier to reproduce and log for papers or tooling benchmarks.
 - **No dependency on slow detectors** — Steganography, chunk analysis, and advanced waste are skipped when the experiment only targets visible overlays.
 
-**Why it underperformed on the crocs/office runs:**
+**Why it can underperform on busy benchmark scenes:**
 
-- **Over-detection** — The visible detector returned 9020 regions on a complex scene. Thresholds (edge density, texture variance, aspect ratio, etc.) are tuned in code and are not conservative for busy images; many non-watermark regions get boxes.
+- **Over-detection** — The visible detector may return thousands of regions on a complex scene. Thresholds (edge density, texture variance, aspect ratio, etc.) are tuned in code and are not conservative for busy images; many non-watermark regions get boxes.
 - **All regions treated equally** — No filtering by confidence, size, or type. So removal runs on thousands of boxes (or on a subset that’s still too large), which is slow and can degrade the image.
 - **LaMa not installed** — Fallback to OpenCV inpainting is weaker for texture; verification then often never passes (e.g. score stuck at 0.10).
 - **No “quick path” for known watermarks** — If the user knows the mark is in a corner (e.g. sparkle), `remove-region` is a better fit, but the default skill runs agentic.
@@ -80,7 +80,7 @@ Goal: **one orchestrated pipeline** that chooses strategy and parameters from co
   3. **Branch:**
      - **Corner path:** Run **ralph** (or **remove-region** with default frac) → verify with visible detector; if not clean, advance strategy or frac (already in ralph). **No** full visible region detection for removal.
      - **Few visible regions** (e.g. total_detections in 1–50 and max_confidence > 0.5): Run **agentic** with current logic but **filter regions** (e.g. confidence ≥ 0.4, cap at 30 regions) before first removal. Optionally **--method lama** if available.
-     - **Many visible regions** (e.g. >100 or 9020): **Do not** run agentic on all; either (i) run **remove-region** for a default corner only (assume “sparkle in corner”), or (ii) run **agentic** only after **filtering** (e.g. top 20 by confidence, or regions with area in [100, 50000] pixels). Log “filtered N regions to M” for audit.
+     - **Many visible regions** (e.g. >100): **Do not** run agentic on all; either (i) run **remove-region** for a default corner only (assume “sparkle in corner”), or (ii) run **agentic** only after **filtering** (e.g. top 20 by confidence, or regions with area in [100, 50000] pixels). Log “filtered N regions to M” for audit.
      - **“Full clean”** or user asked for “everything”: Run **clean** (full detection + cleaning plan); optionally add a final **agentic-style** visible verify/retry with filtered regions only.
 
 ### Phase 2: Add filtering in code (minimal change)
@@ -112,5 +112,5 @@ Goal: **one orchestrated pipeline** that chooses strategy and parameters from co
 ### Summary
 
 - **Current strategy:** Visible-only agentic (detect → remove → verify → retry) by default; simple but over-detects on complex images and has no path for “corner only” or “full clean.”
-- **Better strategies:** Route by hint or by a quick visible-only check (corner → ralph/remove-region; few regions → agentic with filtering; many regions → filter or corner-only; full clean → clean + optional verify). Add region filtering (confidence, size, cap) before removal so we never pass 9020 regions to the remover.
+- **Better strategies:** Route by hint or by a quick visible-only check (corner → ralph/remove-region; few regions → agentic with filtering; many regions → filter or corner-only; full clean → clean + optional verify). Add region filtering (confidence, size, cap) before removal so very large region lists are never passed to the remover unchanged.
 - **More effective pipeline:** Orchestrator (Phase 1) + filtering in agentic (Phase 2) + optional demo (Phase 3) + skill/command (Phase 4), reusing existing `stega/` modules only.

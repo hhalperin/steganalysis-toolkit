@@ -158,10 +158,10 @@ def clean_all_suspicious_images():
     suspicious_files = list(logo_dir.glob("*.png")) if logo_dir.exists() else []
     if not suspicious_files:
         suspicious_files = [
-            logo_dir / "H (Logo).png",
-            logo_dir / "Simple H logo with background.png",
-            logo_dir / "white_bg-HappyHealthy_logo.png",
-            logo_dir / "blue_bg-HappyHealthy_logo.png",
+            logo_dir / "sample_logo_light_bg.png",
+            logo_dir / "sample_logo_dark_bg.png",
+            logo_dir / "sample_corner_mark.png",
+            logo_dir / "sample_text_band.png",
         ]
 
     results = {}
