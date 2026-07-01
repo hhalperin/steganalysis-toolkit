@@ -3,4 +3,4 @@
 # Note: May have dependency conflicts with Pillow>=10; use a separate env if needed.
 simple-lama-inpainting>=0.1.2
 torch>=1.13.1
-torchvision>=0.14.1
+torchvision>=0.27.1
